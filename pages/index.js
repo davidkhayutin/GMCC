@@ -36,6 +36,7 @@ const Body = styled.div`
   padding: 2%;
   width: fit-content;
   min-width: 400px;
+  border-radius: 15px;
   @media screen and (max-width: 600px) {
     min-width: 250px;
   }
