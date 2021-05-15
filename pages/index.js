@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 10%;
+  padding: 5% 10%;
  
 `
 
