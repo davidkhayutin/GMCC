@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import {axiosCryptoClientTel, axiosCryptoClientUSDT, axiosCurrClient} from './api/client'
 import {LoadingIcon} from '../components/LoadingIcon'
 
+import {telFunc, usdtFunc, currencyFunc} from './api/route'
 const Wrapper = styled.div`
   background: url(/castle.jpg);
   width: 100vw;
@@ -42,6 +43,10 @@ const Body = styled.div`
   }
 `
 
+const Amount = styled.span`
+  font-weight: bolder
+`
+
 export default function Home() {
   const [cad,setCad] = useState(0)
   const [us,setUs] = useState(0)
@@ -50,11 +55,11 @@ export default function Home() {
   const [ready, setReady] = useState(false)
   const fetchData =async () => {
     try {
-      const tels = await axiosCryptoClientTel.get()
-      const usdt = await axiosCryptoClientUSDT.get()
+      const tels = await telFunc()
+      const usdt = await usdtFunc()
       setTel(tels.data.data.quote.USD.price)
       setTeth(usdt.data.data.quote.USD.price)
-      const currency = await axiosCurrClient.get()
+      const currency = await currencyFunc()
       setCad(currency.data.USD_CAD)
       setUs(currency.data.CAD_USD)
     } catch (error) {
@@ -110,8 +115,10 @@ export default function Home() {
        <h3>Current Value:  </h3>
        <h4>Your investment is <Profit isProfit={isProfit}>{profitText} </Profit>{percent}%</h4>
        <Column>
-          <Row>CAD:${(((telcoinAmount * tel) + (tethAmount * teth)) * cad ).toFixed(2)}</Row>
-          <Row>USD:${(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2) }</Row>
+          <Row>CAD: <Amount>${(((telcoinAmount * tel) + (tethAmount * teth)) * cad ).toFixed(2)}</Amount></Row>
+          <Row>USD:<Amount>${(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2)}</Amount></Row>
+          <Row>After Jewish Tax: <Amount>$0</Amount></Row>
+
        </Column>
        </>}
        </Body>
