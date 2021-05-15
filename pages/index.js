@@ -47,30 +47,14 @@ const Amount = styled.span`
   font-weight: bolder
 `
 
-export default function Home() {
-  const [cad,setCad] = useState(0)
-  const [us,setUs] = useState(0)
-  const [tel,setTel] = useState(0)
-  const [teth, setTeth] = useState(0)
+export default function Home({telcoin, tether, canada, united}) {
+  const [cad,setCad] = useState(canada)
+  const [us,setUs] = useState(united)
+  const [tel,setTel] = useState(telcoin)
+  const [teth, setTeth] = useState(tether)
   const [ready, setReady] = useState(false)
-  const fetchData =async () => {
-    try {
-      const tels = await telFunc()
-      const usdt = await usdtFunc()
-      setTel(tels.data.data.quote.USD.price)
-      setTeth(usdt.data.data.quote.USD.price)
-      const currency = await currencyFunc()
-      setCad(currency.data.USD_CAD)
-      setUs(currency.data.CAD_USD)
-    } catch (error) {
-      console.log(error.response)
-    }
-  }
 
-  useEffect(()=> {
-    fetchData()
-  },[])
-
+  
   useEffect(()=> {
     if(cad && us && teth && tel){
       setReady(true)
@@ -124,4 +108,19 @@ export default function Home() {
        </Body>
     </Wrapper>
   )
+}
+
+
+Home.getInitialProps = async (ctx) => {
+
+  try {
+    const tels = await telFunc()
+    const usdt = await usdtFunc()
+    const currency = await currencyFunc()
+    return { telcoin : tels.data.data.quote.USD.price, tether: usdt.data.data.quote.USD.price,canada:currency.data.USD_CAD , united: currency.data.CAD_USD}
+
+  } catch (error) {
+      console.log(error)
+  }
+
 }

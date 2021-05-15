@@ -1,9 +1,9 @@
 import axios from 'axios';
-
+import {cors} from './cors'
 export function axiosClientFactoryTel() {
   const headers = {
     'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://pro-api.coinmarketcap.com/v1/tools/price-conversion",
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Methods": "get, GET,OPTIONS,PATCH,DELETE,POST,PUT",
     "Access-Control-Allow-Headers":"X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
@@ -18,7 +18,7 @@ export function axiosClientFactoryTel() {
 export function axiosClientFactoryUSDT() {
   const headers = {
     'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://pro-api.coinmarketcap.com/v1/tools/price-conversion",
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Methods": "get, GET,OPTIONS,PATCH,DELETE,POST,PUT",
     "Access-Control-Allow-Headers":"X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
@@ -34,7 +34,7 @@ export function axiosClientFactoryUSDT() {
 export function axiosCurrClientFactory() {
   const headers = {
     'Content-Type': 'application/json',
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://free.currconv.com/api/v7/",
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Methods": "get, GET,OPTIONS,PATCH,DELETE,POST,PUT",
     "Access-Control-Allow-Headers":"X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
