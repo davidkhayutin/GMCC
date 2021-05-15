@@ -102,8 +102,8 @@ export default function Home() {
 
        <h3>Current Portfolio: </h3>
        <Column>
-          <Row>Telcoin:  <span> amount: {telcoinAmount}</span> <span>value: ${(telcoinAmount * tel).toFixed(2)}</span></Row>
-          <Row>Tether:  <span>  amount: {tethAmount}</span> <span>value: ${(tethAmount * teth).toFixed(2)}</span></Row>
+          <Row>Telcoin: <span> price: {tel.toFixed(3)}</span>  <span> amount: {telcoinAmount}</span> <span>value: ${(telcoinAmount * tel).toFixed(2)}</span></Row>
+          <Row>Tether:  <span> price: {teth.toFixed(2)}</span> <span>  amount: {tethAmount}</span> <span>value: ${(tethAmount * teth).toFixed(2)}</span></Row>
        </Column>
 
        <h3>Current Value:  </h3>
