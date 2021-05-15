@@ -1,10 +1,9 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+
 import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {axiosCryptoClientTel, axiosCryptoClientUSDT, axiosCurrClient} from './api/client'
-
+import {LoadingIcon} from '../components/LoadingIcon'
 
 const Wrapper = styled.div`
   background: url(/castle.jpg);
@@ -36,6 +35,7 @@ const Body = styled.div`
   background: white;
   padding: 2%;
   width: fit-content;
+  min-width: 400px;
 `
 
 export default function Home() {
@@ -43,6 +43,7 @@ export default function Home() {
   const [us,setUs] = useState(0)
   const [tel,setTel] = useState(0)
   const [teth, setTeth] = useState(0)
+  const [ready, setReady] = useState(false)
   const fetchData =async () => {
     try {
       const tels = await axiosCryptoClientTel.get()
@@ -60,6 +61,13 @@ export default function Home() {
   useEffect(()=> {
     fetchData()
   },[])
+
+  useEffect(()=> {
+    if(cad && us && teth && tel){
+      setReady(true)
+    }
+  },[tel, teth, us, cad])
+
   
   const originaInvestment = 1000
   const originalUSInvestment = 793.65
@@ -69,6 +77,8 @@ export default function Home() {
   const isProfit =(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2) > originalUSInvestment
   const profitText = isProfit? "Up": "Down"
   const percent = ((1 - ((((telcoinAmount * tel) + (tethAmount * teth)))) / originalUSInvestment).toFixed(2)) * 100
+
+
   return (
     <Wrapper >
       <Head>
@@ -77,7 +87,10 @@ export default function Home() {
       </Head>
       <h1>Grannys Investments</h1>
       <Body>
-
+     {!ready &&  <LoadingIcon/> }
+    
+      {ready &&
+      <>
       <h3>Orginial Investment: </h3>
        <Column>
           <span>CAD: ${originaInvestment}</span>
@@ -96,6 +109,7 @@ export default function Home() {
           <Row>CAD:${(((telcoinAmount * tel) + (tethAmount * teth)) * cad ).toFixed(2)}</Row>
           <Row>USD:${(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2) }</Row>
        </Column>
+       </>}
        </Body>
     </Wrapper>
   )
