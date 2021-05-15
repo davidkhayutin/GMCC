@@ -36,6 +36,9 @@ const Body = styled.div`
   padding: 2%;
   width: fit-content;
   min-width: 400px;
+  @media screen and (max-width: 600px) {
+    min-width: 250px;
+  }
 `
 
 export default function Home() {
@@ -76,7 +79,7 @@ export default function Home() {
   
   const isProfit =(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2) > originalUSInvestment
   const profitText = isProfit? "Up": "Down"
-  const percent = ((1 - ((((telcoinAmount * tel) + (tethAmount * teth)))) / originalUSInvestment).toFixed(2)) * 100
+  const percent = (((1 - ((((telcoinAmount * tel) + (tethAmount * teth)))) / originalUSInvestment).toFixed(2)) * 100).toFixed(2)
 
 
   return (
