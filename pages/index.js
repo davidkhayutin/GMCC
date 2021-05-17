@@ -64,7 +64,7 @@ export default function Home({telcoin, tether, canada, united}) {
   
   const originaInvestment = 1000
   const originalUSInvestment = 793.65
-  const telcoinAmount = 9355
+  const telcoinAmount = 19881
   const tethAmount = 400.65
   
   const isProfit =(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2) > originalUSInvestment
@@ -93,7 +93,7 @@ export default function Home({telcoin, tether, canada, united}) {
        <h3>Current Portfolio: </h3>
        <Column>
           <Row>Telcoin: <span> price: {tel.toFixed(3)}</span>  <span> amount: {telcoinAmount}</span> <span>value: ${(telcoinAmount * tel).toFixed(2)}</span></Row>
-          <Row>Tether:  <span> price: {teth.toFixed(2)}</span> <span>  amount: {tethAmount}</span> <span>value: ${(tethAmount * teth).toFixed(2)}</span></Row>
+          {/* <Row>Tether:  <span> price: {teth.toFixed(2)}</span> <span>  amount: {tethAmount}</span> <span>value: ${(tethAmount * teth).toFixed(2)}</span></Row> */}
        </Column>
 
        <h3>Current Value:  </h3>
@@ -101,7 +101,6 @@ export default function Home({telcoin, tether, canada, united}) {
        <Column>
           <Row>CAD: <Amount>${(((telcoinAmount * tel) + (tethAmount * teth)) * cad ).toFixed(2)}</Amount></Row>
           <Row>USD:<Amount>${(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2)}</Amount></Row>
-          <Row>After Jewish Tax: <Amount>$0</Amount></Row>
 
        </Column>
        </>}
