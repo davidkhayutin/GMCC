@@ -65,13 +65,14 @@ export default function Home({telcoin, tether, canada, united}) {
   const originaInvestment = 1000
   const originalUSInvestment = 793.65
   const telcoinAmount = 19881
-  const tethAmount = 400.65
+  const tethAmount = 400
   
-  const isProfit =(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2) > originalUSInvestment
+  const isProfit =((telcoinAmount * tel)).toFixed(2) > originalUSInvestment
   const profitText = isProfit? "Up": "Down"
-  const percent = (((1 - ((((telcoinAmount * tel) + (tethAmount * teth)))) / originalUSInvestment).toFixed(2)) * 100).toFixed(2)
+  const percentPlus = ((1 - (originalUSInvestment/(telcoinAmount * tel))) * 100).toFixed(2)
+  const percent = isProfit? percentPlus: ((1 - ((telcoinAmount * tel) / originalUSInvestment)) * 100).toFixed(2)
 
-
+  console.log(percentPlus)
   return (
     <Wrapper >
       <Head>
@@ -99,8 +100,8 @@ export default function Home({telcoin, tether, canada, united}) {
        <h3>Current Value:  </h3>
        <h4>Your investment is <Profit isProfit={isProfit}>{profitText} </Profit>{percent}%</h4>
        <Column>
-          <Row>CAD: <Amount>${(((telcoinAmount * tel) + (tethAmount * teth)) * cad ).toFixed(2)}</Amount></Row>
-          <Row>USD:<Amount>${(((telcoinAmount * tel) + (tethAmount * teth))).toFixed(2)}</Amount></Row>
+          <Row>CAD: <Amount>${(((telcoinAmount * tel) ) * cad ).toFixed(2)}</Amount></Row>
+          <Row>USD:<Amount>${(telcoinAmount * tel ).toFixed(2)}</Amount></Row>
 
        </Column>
        </>}
